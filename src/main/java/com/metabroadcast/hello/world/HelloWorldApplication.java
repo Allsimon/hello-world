@@ -13,8 +13,6 @@ import io.dropwizard.setup.Environment;
 
 public class HelloWorldApplication extends Application<HelloWorldConfiguration> {
 
-    private HelloWorldComponent component;
-
     public static void main(String[] args) throws Exception {
         new HelloWorldApplication().run(args);
     }
@@ -30,10 +28,7 @@ public class HelloWorldApplication extends Application<HelloWorldConfiguration> 
             }
         });
 
-        component = DaggerHelloWorldComponent.builder()
-                .helloWorldModule(new HelloWorldModule(configuration))
-                .build();
-        environment.jersey().register(component.inject(new HelloWorldResource()));
+        environment.jersey().register(new HelloWorldResource());
 
     }
 }
